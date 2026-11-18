@@ -3,3 +3,9 @@ contact_links:
   - name: KEROTOWN on the Kero Learns Japanese website
     url: https://kerolearnsjapanese.com/kerotown/
     about: News about the game, the store and the players.
+  - name: An idea for a Kero video
+    url: https://github.com/Kero-Learns-Japanese/video-ideas/issues/new/choose
+    about: Words for Kero to learn, stories and languages go in video ideas.
+  - name: Kero's ideas page
+    url: https://kerolearnsjapanese.com/ideas/
+    about: See every idea on Kero's list and tap a heart to back one.
