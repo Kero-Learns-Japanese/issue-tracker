@@ -1,0 +1,65 @@
+name: Report a bug
+description: Something in KEROTOWN went wrong.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping fix KEROTOWN!
+        **Everything here can be seen by anyone.** Never write your real name, age, school, where you live, a password, or the code from a sign in email.
+  - type: textarea
+    id: what
+    attributes:
+      label: What went wrong?
+      description: What were you doing, and what happened?
+      placeholder: I bought a sword in the store and it did not show in my things.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where were you playing?
+      options:
+        - In a web browser on a computer
+        - In a web browser on a phone or tablet
+        - Android phone or tablet
+        - iPhone or iPad
+        - Mac or PC app
+        - I am not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part of the game?
+      options:
+        - Signing up or signing in
+        - A round (fighting or racing)
+        - Kero Town or building a house
+        - The store or my things
+        - MY MIX, art or making things
+        - Parties, chat or voice
+        - Settings or GROWN-UPS
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Can you make it happen again? How?
+      placeholder: |
+        1. Open the store
+        2. Buy the sword
+        3. Look in my things
+  - type: textarea
+    id: picture
+    attributes:
+      label: Screenshot
+      description: Drag a picture in here if you can. Check first that it shows no real names or anything about you.

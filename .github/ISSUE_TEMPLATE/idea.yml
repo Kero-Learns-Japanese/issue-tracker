@@ -1,0 +1,35 @@
+name: Share an idea
+description: Something new for KEROTOWN, or a way to make it better.
+title: "Idea: "
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We love ideas!
+        **Everything here can be seen by anyone.** Never write your real name, age, school, where you live, or a password.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What is your idea?
+      placeholder: A pet frog that follows me around Kero Town.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would it make the game better?
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part of the game is it for?
+      options:
+        - A round (fighting or racing)
+        - Kero Town or building a house
+        - The store or my things
+        - MY MIX, art or making things
+        - Parties, chat or voice
+        - My player page on the website
+        - Something new
+    validations:
+      required: true
