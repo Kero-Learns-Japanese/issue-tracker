@@ -1,0 +1,52 @@
+# Labels every report from the answers its form gave, so whoever posts one labels it by their own choices: GitHub
+# lets only the repo's own people add labels by hand, and a form's own `labels` was not applied to the first report.
+# Reads the issue's text in JavaScript only, never in a shell, so nothing a post says can run as a command.
+name: Label from the form
+on:
+  issues:
+    types: [opened, edited]
+permissions:
+  issues: write
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+            const title = context.payload.issue.title || "";
+            const answer = (question) => {
+              const at = body.indexOf("### " + question);
+              if (at < 0) return "";
+              const rest = body.slice(at + question.length + 4).split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+              return rest.length > 0 && !rest[0].startsWith("###") ? rest[0] : "";
+            };
+            const parts = {
+              "Signing up or signing in": "sign in",
+              "A round (fighting or racing)": "rounds",
+              "Kero Town or building a house": "kero town",
+              "The store or my things": "store",
+              "MY MIX, art or making things": "making things",
+              "Parties, chat or voice": "parties and chat",
+              "Settings or GROWN-UPS": "settings",
+              "My player page on the website": "player page",
+              "Something new": "something new",
+            };
+            const places = {
+              "In a web browser on a computer": "web",
+              "In a web browser on a phone or tablet": "web",
+              "Android phone or tablet": "android",
+              "iPhone or iPad": "iphone or ipad",
+              "Mac or PC app": "mac or pc",
+            };
+            const labels = [];
+            if (title.startsWith("Bug:") || body.includes("### What went wrong?")) labels.push("bug");
+            if (title.startsWith("Idea:") || body.includes("### What is your idea?")) labels.push("idea");
+            const part = parts[answer("Which part of the game?")] || parts[answer("Which part of the game is it for?")];
+            if (part) labels.push(part);
+            const place = places[answer("Where were you playing?")];
+            if (place) labels.push(place);
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number, labels });
+            }
